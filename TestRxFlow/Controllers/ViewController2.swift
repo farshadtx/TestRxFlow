@@ -17,7 +17,7 @@ class ViewController2: UIViewController, Stepper {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         button.rx.tap
-            .map { _ in AppStep.normal }
+            .map { _ in MainStep.start }
             .bind(to: step)
             .disposed(by: disposeBag)
     }

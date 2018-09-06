@@ -37,8 +37,8 @@ class SubFlow: Flow {
             let viewController4 = storyboard.instantiateViewController(withIdentifier: "ViewController4") as! ViewController4
             rootViewController.pushViewController(viewController4, animated: true)
             return .one(flowItem: NextFlowItem(nextPresentable: viewController4, nextStepper: viewController4))
-        case AppStep.deepLink:
-            return .end(withStepForParentFlow: AppStep.deepLink)
+        case MainStep.deepLink:
+            return .end(withStepForParentFlow: MainStep.deepLink)
         default:
             return .none
         }

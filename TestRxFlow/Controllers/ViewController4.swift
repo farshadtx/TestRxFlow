@@ -16,7 +16,7 @@ class ViewController4: UIViewController, Stepper {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         button.rx.tap
-            .map { _ in AppStep.deepLink }
+            .map { _ in MainStep.deepLink }
             .bind(to: DeepLinkStepper.shared.step)
             .disposed(by: disposeBag)
     }

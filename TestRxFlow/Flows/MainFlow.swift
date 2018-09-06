@@ -13,7 +13,7 @@ enum MainStep: Step {
     case start
     case navigate
     case subflow
-    case end
+    case deepLink
 }
 
 class MainFlow: Flow {
@@ -44,8 +44,11 @@ class MainFlow: Flow {
             }
             let stepperIdea = CompositeStepper(steppers: [OneStepper(withSingleStep: SubStep.start), DeepLinkStepper.shared])
             return .one(flowItem: NextFlowItem(nextPresentable: subFlow, nextStepper: stepperIdea))
-        case AppStep.deepLink:
-            return .end(withStepForParentFlow: AppStep.deepLink)
+        case MainStep.deepLink:
+            rootViewController.presentedViewController?.dismiss(animated: true)
+            let viewController2 = storyboard.instantiateViewController(withIdentifier: "ViewController2") as! ViewController2
+            rootViewController.setViewControllers([viewController2], animated: true)
+            return .one(flowItem: NextFlowItem(nextPresentable: viewController2, nextStepper: viewController2))
         default:
             return .none
         }

@@ -16,13 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var coordinator = Coordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        guard let window = self.window else { return false }
+        let mainFlow = MainFlow()
+        Flows.whenReady(flow1: mainFlow) { [weak self] root in
+            self?.window?.rootViewController = root
+        }
 
-        let appFlow = AppFlow(window)
-
-        let startStepper = OneStepper(withSingleStep: AppStep.normal)
-
-        coordinator.coordinate(flow: appFlow, withStepper: startStepper)
+        let startStepper = OneStepper(withSingleStep: MainStep.start)
+        coordinator.coordinate(flow: mainFlow, withStepper: startStepper)
 
         return true
     }
