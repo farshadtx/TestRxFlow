@@ -12,12 +12,19 @@ import RxFlow
 class ViewController5: UIViewController, Stepper {
 
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var weirdButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         button.rx.tap
             .map { _ in MainStep.subflow }
+            .bind(to: step)
+            .disposed(by: disposeBag)
+
+        weirdButton.rx.tap
+            .map { _ in MainStep.deepLink }
             .bind(to: step)
             .disposed(by: disposeBag)
     }

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let startStepper = OneStepper(withSingleStep: MainStep.start)
-        coordinator.coordinate(flow: mainFlow, withStepper: startStepper)
+        coordinator.coordinate(flow: mainFlow, withStepper: CompositeStepper(steppers: [startStepper, DeepLinkStepper.shared]))
 
         return true
     }
